@@ -1,0 +1,15 @@
+/*
+Theme Name: Signal & Shield
+Theme URI: https://signalshield.example
+Author: Signal & Shield Consulting
+Description: Bespoke block theme for Signal & Shield Consulting, a wireless, network and cybersecurity consultancy in Doha, Qatar. Pairs with the Signal & Shield Core plugin, which adds the network health check, contact form and checklist download.
+Requires at least: 6.6
+Tested up to: 7.1
+Requires PHP: 8.0
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: signal-shield
+*/
+
+/* Styles live in assets/css/theme.css and theme.json. */

@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Office Wi-Fi Checklist · Signal &amp; Shield Consulting</title>
+<style>
+@font-face { font-family: "Manrope"; src: url("../../wp-content/themes/signal-shield/assets/fonts/manrope-latin-variable.woff2") format("woff2"); font-weight: 200 800; }
+@font-face { font-family: "JetBrains Mono"; src: url("../../wp-content/themes/signal-shield/assets/fonts/jetbrains-mono-latin-variable.woff2") format("woff2"); font-weight: 100 800; }
+
+@page { size: A4; margin: 0; }
+
+:root {
+	--midnight: #0a0e14;
+	--surface: #121a24;
+	--steel: #2b3a4a;
+	--lime: #c6f432;
+	--lime-ink: #3e5a12;
+	--slate: #3a4654;
+	--line: #d5dce4;
+	--cloud: #f4f6f8;
+}
+
+* { box-sizing: border-box; }
+
+body {
+	margin: 0;
+	font-family: "Manrope", Arial, sans-serif;
+	font-size: 10pt;
+	line-height: 1.45;
+	color: var(--slate);
+	-webkit-print-color-adjust: exact;
+	print-color-adjust: exact;
+}
+
+.page {
+	width: 210mm;
+	height: 297mm;
+	padding: 16mm 16mm 14mm;
+	position: relative;
+	page-break-after: always;
+	display: flex;
+	flex-direction: column;
+}
+
+.page:last-child { page-break-after: auto; }
+
+.mono { font-family: "JetBrains Mono", monospace; }
+
+.brand {
+	display: flex;
+	align-items: center;
+	gap: 7px;
+	font-weight: 800;
+	font-size: 11pt;
+	color: var(--midnight);
+	letter-spacing: -0.01em;
+}
+
+.bars { display: inline-flex; align-items: flex-end; gap: 2px; height: 14px; }
+.bars span { width: 3.5px; background: var(--lime-ink); border-radius: 1px; }
+.bars span:nth-child(1) { height: 5px; }
+.bars span:nth-child(2) { height: 9px; }
+.bars span:nth-child(3) { height: 14px; }
+
+.cover {
+	background: var(--midnight);
+	color: #e6ebf0;
+	margin: -16mm -16mm 8mm;
+	padding: 16mm 16mm 12mm;
+	background-image:
+		linear-gradient(rgba(198, 244, 50, 0.06) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(198, 244, 50, 0.06) 1px, transparent 1px);
+	background-size: 10mm 10mm;
+}
+
+.cover .brand { color: #fff; }
+.cover .bars span { background: var(--lime); }
+
+.eyebrow {
+	font-family: "JetBrains Mono", monospace;
+	font-size: 7.5pt;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--lime);
+	margin: 12mm 0 3mm;
+}
+
+h1 {
+	margin: 0;
+	font-size: 32pt;
+	line-height: 1.02;
+	letter-spacing: -0.035em;
+	font-weight: 800;
+	color: #fff;
+}
+
+.cover p {
+	margin: 4mm 0 0;
+	max-width: 130mm;
+	font-size: 11pt;
+	color: #a9b6c3;
+}
+
+.how {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 4mm;
+	margin-top: 8mm;
+}
+
+.how div {
+	border-top: 1px solid var(--steel);
+	padding-top: 2.5mm;
+	font-size: 8.5pt;
+	color: #a9b6c3;
+}
+
+.how strong {
+	display: block;
+	color: #fff;
+	font-size: 9.5pt;
+	margin-bottom: 1mm;
+}
+
+.how .key {
+	display: inline-block;
+	font-family: "JetBrains Mono", monospace;
+	font-size: 7pt;
+	padding: 0.5mm 2mm;
+	border-radius: 99px;
+	margin-right: 1mm;
+	font-weight: 600;
+}
+
+.k-yes { background: #1f6f43; color: #fff; }
+.k-part { background: #e0a43a; color: var(--midnight); }
+.k-no { background: #c43c3c; color: #fff; }
+
+.running {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-bottom: 4mm;
+	margin-bottom: 5mm;
+	border-bottom: 1px solid var(--line);
+}
+
+.running .mono { font-size: 7.5pt; color: var(--slate); }
+
+section { margin-bottom: 6mm; }
+
+h2 {
+	display: flex;
+	align-items: baseline;
+	gap: 3mm;
+	margin: 0 0 1mm;
+	font-size: 15pt;
+	letter-spacing: -0.02em;
+	color: var(--midnight);
+}
+
+h2 .num {
+	font-family: "JetBrains Mono", monospace;
+	font-size: 8.5pt;
+	font-weight: 500;
+	color: var(--lime-ink);
+}
+
+.why {
+	margin: 0 0 3mm;
+	font-size: 9pt;
+}
+
+.checks {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border-top: 1.5px solid var(--midnight);
+}
+
+.checks li {
+	display: grid;
+	grid-template-columns: 1fr 32mm;
+	gap: 3mm;
+	align-items: start;
+	padding: 2.3mm 0;
+	border-bottom: 1px solid var(--line);
+}
+
+.box {
+	width: 4.5mm;
+	height: 4.5mm;
+	border: 1.5px solid var(--midnight);
+	border-radius: 1mm;
+	margin-top: 0.4mm;
+}
+
+.checks strong {
+	display: block;
+	color: var(--midnight);
+	font-size: 10pt;
+}
+
+.checks span.how-to {
+	display: block;
+	font-size: 8.5pt;
+	margin-top: 0.5mm;
+}
+
+.answer {
+	display: flex;
+	gap: 1.2mm;
+	justify-content: flex-end;
+	font-family: "JetBrains Mono", monospace;
+	font-size: 6.5pt;
+	color: var(--slate);
+	padding-top: 0.6mm;
+}
+
+.answer i {
+	font-style: normal;
+	border: 1px solid var(--line);
+	border-radius: 99px;
+	padding: 0.4mm 1.6mm;
+}
+
+.foot {
+	margin-top: auto;
+	display: flex;
+	justify-content: space-between;
+	font-family: "JetBrains Mono", monospace;
+	font-size: 7pt;
+	color: var(--slate);
+	padding-top: 3mm;
+	border-top: 1px solid var(--line);
+}
+
+.score {
+	background: var(--cloud);
+	border-radius: 4mm;
+	padding: 5mm 6mm;
+	margin-bottom: 5mm;
+}
+
+.score h2 { margin-bottom: 3mm; }
+
+.score table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 9pt;
+}
+
+.score td {
+	padding: 1.6mm 0;
+	border-top: 1px solid var(--line);
+	vertical-align: top;
+}
+
+.score td:first-child { width: 34mm; font-weight: 700; color: var(--midnight); }
+
+.cta {
+	background: var(--midnight);
+	color: #a9b6c3;
+	border-radius: 4mm;
+	padding: 5mm 7mm;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 6mm;
+	align-items: center;
+}
+
+.cta h3 {
+	margin: 0 0 1.5mm;
+	font-size: 16pt;
+	letter-spacing: -0.02em;
+	color: #fff;
+}
+
+.cta p { margin: 0; font-size: 9.5pt; }
+
+.notes {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 4mm;
+}
+
+.notes h2 { margin-bottom: 1mm; }
+
+.notes .lines {
+	flex: 1;
+	background-image: linear-gradient(transparent calc(9mm - 1px), var(--line) calc(9mm - 1px));
+	background-size: 100% 9mm;
+	border-top: 1.5px solid var(--midnight);
+}
+
+.cta .contact {
+	font-family: "JetBrains Mono", monospace;
+	font-size: 8.5pt;
+	color: #e6ebf0;
+	line-height: 1.8;
+	text-align: right;
+}
+
+.cta .contact b { color: var(--lime); font-weight: 600; }
+</style>
+</head>
+<body>
+
+<!-- Page 1 -->
+<div class="page">
+	<div class="cover">
+		<div class="brand"><span class="bars"><span></span><span></span><span></span></span> Signal &amp; Shield Consulting</div>
+		<p class="eyebrow">Free guide · 24 checks · about 45 minutes</p>
+		<h1>Office Wi-Fi Checklist</h1>
+		<p>Walk through these checks with your office manager or IT provider. You do not need technical tools, just a phone, a floor plan and someone who knows who manages your network.</p>
+		<div class="how">
+			<div><strong>1. Walk and test</strong>Go room by room with a phone. Run a free speed test in each space people use.</div>
+			<div><strong>2. Answer honestly</strong>Circle <span class="key k-yes">Yes</span><span class="key k-part">Partly</span><span class="key k-no">No</span> as honestly as you can.</div>
+			<div><strong>3. Count and act</strong>Add up your "No" answers on page 3 to see where to start first.</div>
+		</div>
+	</div>
+
+	<section>
+		<h2><span class="num">01</span> Coverage</h2>
+		<p class="why">Wi-Fi should work everywhere people actually sit, meet and walk, not just near the router.</p>
+		<ul class="checks">
+			<li><div><strong>Every meeting room has a strong signal</strong><span class="how-to">At least three bars on a phone, and a video call that does not freeze.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+			<li><div><strong>No dead spots in corners, upper floors or back offices</strong><span class="how-to">Mark any room where the speed test fails or crawls on your floor plan.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+			<li><div><strong>Calls continue when walking between rooms and floors</strong><span class="how-to">Start a Wi-Fi call and walk your usual route. Note where it drops.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+			<li><div><strong>Access points are mounted on ceilings, not hidden in cupboards</strong><span class="how-to">Metal cabinets, glass partitions and false ceilings block signal badly.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+		</ul>
+	</section>
+
+	<section>
+		<h2><span class="num">02</span> Busy-hour performance</h2>
+		<p class="why">Wi-Fi that is fine at 7am but crawls at 10am usually has too few access points, not too slow an internet line.</p>
+		<ul class="checks">
+			<li><div><strong>Speed stays usable when the office is full</strong><span class="how-to">Repeat your speed test at the busiest time of day and compare.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+			<li><div><strong>Large meetings and training sessions run without complaints</strong><span class="how-to">Ask whoever books your biggest room how the Wi-Fi copes.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+			<li><div><strong>Your internet plan matches today's headcount</strong><span class="how-to">Plans bought for 20 people rarely cope with 60 plus video calls.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+			<li><div><strong>Laptops and phones connect to the faster 5 GHz band</strong><span class="how-to">On a laptop, the Wi-Fi details screen usually shows the band in use.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+		</ul>
+	</section>
+
+	<div class="foot"><span>Office Wi-Fi Checklist</span><span>signalshield.example · page 1 of 3</span></div>
+</div>
+
+<!-- Page 2 -->
+<div class="page">
+	<div class="running"><div class="brand"><span class="bars"><span></span><span></span><span></span></span> Signal &amp; Shield</div><span class="mono">Office Wi-Fi Checklist</span></div>
+
+	<section>
+		<h2><span class="num">03</span> Guest access</h2>
+		<p class="why">Visitors need internet. They should never be able to see your printers, files or staff laptops.</p>
+		<ul class="checks">
+			<li><div><strong>Guests use a separate Wi-Fi network from staff</strong><span class="how-to">There should be two network names, with different passwords.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+			<li><div><strong>Guests cannot reach your printers, shared drives or cameras</strong><span class="how-to">On guest Wi-Fi, try printing or opening a shared folder. It should fail.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+			<li><div><strong>The guest password changes regularly</strong><span class="how-to">Monthly is ideal. Former contractors should not still be connected.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+			<li><div><strong>Staff personal phones use guest Wi-Fi, not the office network</strong><span class="how-to">Personal devices are not managed by you and should stay separate.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+		</ul>
+	</section>
+
+	<section>
+		<h2><span class="num">04</span> Security and passwords</h2>
+		<p class="why">Your Wi-Fi is a front door. These checks make sure it is locked properly.</p>
+		<ul class="checks">
+			<li><div><strong>The staff Wi-Fi uses WPA2 or WPA3 security</strong><span class="how-to">Your device's Wi-Fi details will show this. Anything older needs replacing.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+			<li><div><strong>The staff Wi-Fi password is not written on the wall</strong><span class="how-to">Or on a sticky note on reception. It happens more than you would think.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+			<li><div><strong>The Wi-Fi equipment's admin password has been changed</strong><span class="how-to">Ask your IT provider. Factory passwords are published online.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+			<li><div><strong>Leavers lose Wi-Fi access on their last day</strong><span class="how-to">If everyone shares one password, change it whenever someone leaves.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+		</ul>
+	</section>
+
+	<section class="notes">
+		<h2><span class="num">✎</span> Notes from your walk-through</h2>
+		<p class="why">Rooms with weak signal, slow speeds at busy times, and questions for your IT provider.</p>
+		<div class="lines"></div>
+	</section>
+
+	<div class="foot"><span>Office Wi-Fi Checklist</span><span>signalshield.example · page 2 of 3</span></div>
+</div>
+
+<!-- Page 3 -->
+<div class="page">
+	<div class="running"><div class="brand"><span class="bars"><span></span><span></span><span></span></span> Signal &amp; Shield</div><span class="mono">Office Wi-Fi Checklist</span></div>
+
+	<section>
+		<h2><span class="num">05</span> Equipment and updates</h2>
+		<p class="why">Old equipment slows everyone down and often stops getting security fixes.</p>
+		<ul class="checks">
+			<li><div><strong>Your Wi-Fi equipment is less than six years old</strong><span class="how-to">The model number is on a label; a quick search shows its release date.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+			<li><div><strong>Software updates for the Wi-Fi equipment are installed</strong><span class="how-to">Ask when they were last applied. Within the last six months is good.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+			<li><div><strong>Someone is told automatically when an access point goes offline</strong><span class="how-to">Otherwise you find out when staff start complaining.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+			<li><div><strong>The comms cupboard is cool, tidy and locked</strong><span class="how-to">Overheating is a common cause of random outages in Doha summers.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+		</ul>
+	</section>
+
+	<section>
+		<h2><span class="num">06</span> Who to call</h2>
+		<p class="why">When the Wi-Fi fails at 9am on a Sunday, everyone should know what happens next.</p>
+		<ul class="checks">
+			<li><div><strong>You know exactly who manages your Wi-Fi</strong><span class="how-to">A named person or company, with a phone number someone can find.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+			<li><div><strong>Their response times are written down</strong><span class="how-to">For example: reply within one hour, on site within four.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+			<li><div><strong>Admin passwords are stored safely by your business</strong><span class="how-to">Not only by one contractor. If they disappear, you should not be locked out.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+			<li><div><strong>There is a backup plan if the internet line fails</strong><span class="how-to">A second line, or at least a 4G or 5G router for essential work.</span></div><div class="answer" aria-label="Circle one"><i>Yes</i><i>Partly</i><i>No</i></div></li>
+		</ul>
+	</section>
+
+	<div class="score">
+		<h2>What your answers mean</h2>
+		<table>
+			<tr><td>0 to 3 "No"</td><td>Your Wi-Fi is in good shape. Repeat this checklist once a year, or after any office move or renovation.</td></tr>
+			<tr><td>4 to 8 "No"</td><td>A few weak spots. Start with sections 03 and 04: guest access and security fixes are usually quick and cheap.</td></tr>
+			<tr><td>9 or more "No"</td><td>Your Wi-Fi is probably costing you time every day. A professional survey will show exactly what to fix, in what order.</td></tr>
+		</table>
+	</div>
+
+	<div class="cta">
+		<div>
+			<h3>Want a second opinion?</h3>
+			<p>Send us your completed checklist and we will tell you, free of charge, which three fixes would make the biggest difference.</p>
+		</div>
+		<div class="contact"><b>+974 4412 7788</b><br>hello@signalshield.example<br>West Bay, Doha</div>
+	</div>
+
+	<div class="foot"><span>© Signal &amp; Shield Consulting W.L.L.</span><span>signalshield.example · page 3 of 3</span></div>
+</div>
+
+</body>
+</html>

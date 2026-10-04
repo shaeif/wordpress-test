@@ -1,0 +1,103 @@
+# Local development stack for the Signal & Shield Consulting website.
+#
+#   docker compose up -d          # start WordPress, the database and Mailpit
+#   docker compose run --rm setup # first run only: install WordPress and activate the site
+#
+# Site:    http://localhost:8080        (admin: /wp-admin, user "admin", password "admin")
+# Mailpit: http://localhost:8025        (catches every email the site sends)
+
+services:
+  db:
+    image: mariadb:11
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: wordpress
+      MARIADB_USER: wordpress
+      MARIADB_PASSWORD: wordpress
+      MARIADB_ROOT_PASSWORD: rootpass
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+
+  wordpress:
+    image: wordpress:7.1-php8.3-apache
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${WP_PORT:-8080}:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      # Set WP_DEBUG=1 in your shell or a .env file to log PHP notices.
+      WORDPRESS_DEBUG: ${WP_DEBUG:-}
+      WORDPRESS_CONFIG_EXTRA: |
+        define( 'WP_DEBUG_DISPLAY', false );
+        define( 'WP_DEBUG_LOG', '/dev/stderr' );
+      SS_SMTP_HOST: mailpit
+      SS_SMTP_PORT: 1025
+    volumes:
+      - wp_data:/var/www/html
+      - ./wp-content/themes/signal-shield:/var/www/html/wp-content/themes/signal-shield
+      - ./wp-content/plugins/signal-shield-core:/var/www/html/wp-content/plugins/signal-shield-core
+      - ./wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins
+
+  mailpit:
+    image: axllent/mailpit:latest
+    restart: unless-stopped
+    ports:
+      - "${MAILPIT_PORT:-8025}:8025"
+
+  # One-off installer: docker compose run --rm setup
+  setup:
+    image: wordpress:cli
+    profiles: ["tools"]
+    user: "33:33"
+    depends_on:
+      db:
+        condition: service_healthy
+      wordpress:
+        condition: service_started
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      SITE_URL: ${SITE_URL:-http://localhost:8080}
+      HOME: /tmp
+    volumes:
+      - wp_data:/var/www/html
+      - ./wp-content/themes/signal-shield:/var/www/html/wp-content/themes/signal-shield
+      - ./wp-content/plugins/signal-shield-core:/var/www/html/wp-content/plugins/signal-shield-core
+      - ./wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins
+      - ./bin/setup.sh:/setup.sh:ro
+    entrypoint: ["sh", "/setup.sh"]
+
+  # Ad-hoc WP-CLI: docker compose run --rm wpcli <command>
+  wpcli:
+    image: wordpress:cli
+    profiles: ["tools"]
+    user: "33:33"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+      HOME: /tmp
+    volumes:
+      - wp_data:/var/www/html
+      - ./wp-content/themes/signal-shield:/var/www/html/wp-content/themes/signal-shield
+      - ./wp-content/plugins/signal-shield-core:/var/www/html/wp-content/plugins/signal-shield-core
+      - ./wp-content/mu-plugins:/var/www/html/wp-content/mu-plugins
+    entrypoint: ["wp"]
+
+volumes:
+  db_data:
+  wp_data:

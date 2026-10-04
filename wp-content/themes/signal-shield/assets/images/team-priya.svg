@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 460" width="400" height="460">
+  <rect width="400" height="460" fill="#121A24"/>
+  <path d="M0 0h400v460H0z" fill="none" stroke="#1F2B38" stroke-width="2"/>
+  <g stroke="#1F2B38" stroke-width="1">
+    <path d="M0 115h400M0 230h400M0 345h400M100 0v460M200 0v460M300 0v460"/>
+  </g>
+  <circle cx="200" cy="178" r="74" fill="#2B3A4A"/>
+  <path d="M62 460c8-92 68-150 138-150s130 58 138 150z" fill="#2B3A4A"/>
+  <text x="200" y="198" text-anchor="middle" font-family="Manrope, Arial, sans-serif" font-weight="800" font-size="56" fill="#C6F432">PN</text>
+  <rect x="20" y="20" width="148" height="28" rx="14" fill="#0A0E14"/>
+  <text x="94" y="39" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="#A9B6C3">PHOTO PLACEHOLDER</text>
+</svg>
