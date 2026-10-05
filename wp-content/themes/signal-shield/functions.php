@@ -10,6 +10,7 @@ defined( 'ABSPATH' ) || exit;
 define( 'SIGNAL_SHIELD_THEME_VERSION', '1.0.0' );
 
 require_once get_theme_file_path( 'inc/setup.php' );
+require_once get_theme_file_path( 'inc/plugin-check.php' );
 
 /**
  * Theme supports and editor styles.

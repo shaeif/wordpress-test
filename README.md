@@ -14,6 +14,7 @@ A complete WordPress site for **Signal & Shield Consulting**, a fictional wirele
 | `docker-compose.yml`, `bin/setup.sh` | Local stack: WordPress 7.1 (PHP 8.3), MariaDB 11, Mailpit and WP-CLI. |
 | `resources/checklist/` | HTML source of the checklist PDF. `bin/build-checklist.js` rebuilds it. |
 | `docs/screenshots/` | Screenshots of the finished site. |
+| `bin/package.sh` | Builds upload-ready zips of the theme and plugin in `dist/`. |
 
 ## Run it locally
 
@@ -31,6 +32,17 @@ docker compose run --rm setup   # first run only: installs WordPress and creates
 Other ports: `WP_PORT=8081 MAILPIT_PORT=8026 docker compose up -d`. To log PHP notices, start with `WP_DEBUG=1`.
 
 To start over: `docker compose down -v`, then repeat the two commands above.
+
+## Install on an existing WordPress site
+
+The site is **two parts that work together**, and both must be installed and active:
+
+1. Build the zips: `sh bin/package.sh` creates `dist/signal-shield.zip` (theme) and `dist/signal-shield-core.zip` (plugin).
+2. **Plugins › Add New › Upload Plugin** → `signal-shield-core.zip` → **Activate**.
+3. **Appearance › Themes › Add New › Upload Theme** → `signal-shield.zip` → **Activate**. The pages are created and Home is set as the front page.
+4. **Settings › Permalinks** → choose **Post name** and save.
+
+If the theme is active without the plugin, the forms are replaced by a phone/email fallback instead of raw `[ss_…]` text, and administrators see a notice with an **Activate** button.
 
 ## Pages
 

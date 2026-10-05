@@ -1730,6 +1730,31 @@ body .ss-button:not(.ss-button--ghost):hover {
 	color: var(--ss-muted);
 }
 
+/* ---------- Fallback when the companion plugin is inactive ---------- */
+
+.ss-fallback {
+	display: grid;
+	gap: 1rem;
+	padding: clamp(1.25rem, 3vw, 1.75rem);
+	border: 1.5px dashed var(--ss-field-border);
+	border-radius: var(--ss-radius);
+}
+
+.ss-fallback > * {
+	margin: 0;
+}
+
+.ss-fallback__contact {
+	font-weight: 700;
+	line-height: 1.8;
+}
+
+.ss-fallback__admin {
+	font-family: var(--ss-mono);
+	font-size: 0.75rem;
+	color: var(--ss-text-muted);
+}
+
 /* ---------- Generic prose pages (privacy, posts) ---------- */
 
 .ss-prose .wp-block-post-content > * + * {
